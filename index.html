@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Are You a Good Child?</title>
+  <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+  <div class="container">
+    <h1>Are You a Good Child?</h1>
+    <div id="quiz-box">
+      <p id="question">Loading...</p> 
+    
+      <div id="buttons">
+        <button id="yes-btn">Yes</button> 
+        <button id="no-btn">No</button>  
+      </div>
+
+      <p id="result" style="font-weight: bold;"></p>
+   
+      <button id="restart-btn" style="display: none;">Restart</button> 
+    </div>
+  </div>
+  <script>
+    //questions
+    const questions = [
+      "Did you get into a prestigious university?",
+      "Did you pursue a graduate degree?",
+      "Did you get a high-paying job?",
+      "Is your job stable?",
+      "Are you married?",
+      "Is your partner approved by your parents?",
+      "Do you have children?",
+      "Do your parents consider you successful?"
+    ];
+
+    let currentQ = 0;  
+    let answers = [];  
+
+    const questionEl = document.getElementById('question');
+    const yesBtn = document.getElementById('yes-btn');
+    const noBtn = document.getElementById('no-btn');
+    const resultEl = document.getElementById('result');
+    const restartBtn = document.getElementById('restart-btn');
+
+  //current question
+    function displayQuestion() {
+      if (currentQ < questions.length) {
+        questionEl.textContent = questions[currentQ];
+      } else {
+        showResult(); 
+      }
+    }
+
+    // yes/no
+    function handleAnswer(isYes) {
+        //store answers
+      answers.push(isYes); 
+      localStorage.setItem("childQuizAnswers", JSON.stringify(answers)); 
+      currentQ++;
+      displayQuestion(); 
+    }
+
+    // final result
+    function showResult() {
+      const allGood = answers.every(ans => ans === true); // all answers should be true
+      resultEl.textContent = allGood
+        ? "Congratulations! You are a GOOD CHILD in the eyes of Chinese parents!"
+        : "Sorry... You are NOT a good child (yet).";
+      // restart button
+      yesBtn.style.display = 'none';
+      noBtn.style.display = 'none';
+      restartBtn.style.display = 'inline-block';
+    }
+
+    // restatrt
+    function restartQuiz() {
+        //clean all answers
+      answers = []; 
+      //clean questions
+      currentQ = 0;
+      //clean local storage
+      localStorage.removeItem("childQuizAnswers"); 
+      resultEl.textContent = '';
+      yesBtn.style.display = 'inline-block';
+      noBtn.style.display = 'inline-block';
+      restartBtn.style.display = 'none';
+      displayQuestion();
+    }
+
+    yesBtn.addEventListener('click', () => handleAnswer(true));
+    noBtn.addEventListener('click', () => handleAnswer(false));
+    restartBtn.addEventListener('click', restartQuiz);
+
+    // load previous answrs
+    const stored = localStorage.getItem("childQuizAnswers");
+    if (stored) {
+      answers = JSON.parse(stored);
+      currentQ = answers.length;
+    }
+//initialize first question
+    displayQuestion(); 
+  </script>
+</body>
+</html>
