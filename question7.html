@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Question 7</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>Do you have children?</h2>
+    <button onclick="submitAnswer(true)">Yes</button>
+    <button onclick="submitAnswer(false)">No</button>
+  </div>
+
+  <script src="shared.js"></script>
+  <script>
+    function submitAnswer(answer) {
+      storeAnswer(6, answer); // 6 = question 7
+      window.location.href = "question8.html";
+    }
+  </script>
+</body>
+</html>

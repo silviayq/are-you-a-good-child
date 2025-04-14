@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'Pixelify';
+    src: url('PixelifySans-VariableFont_wght.ttf') format('truetype');
+  }
+  
+  body {
+    font-family: 'Pixelify', sans-serif;
+    color: blue;
+    background-image: url('background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  h2 {
+    margin-bottom: 30px;
+    font-size: 28px;
+  }
+  
+  button {
+    font-family: 'Pixelify', sans-serif;
+    font-size: 20px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+  }

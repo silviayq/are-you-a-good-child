@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Result</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2 id="resultText">Calculating...</h2>
+    <button onclick="restart()">Restart</button>
+  </div>
+
+  <script src="shared.js"></script>
+  <script>
+    const answers = getAnswers();
+    const allTrue = answers.length === 8 && answers.every(ans => ans === true);
+    document.getElementById("resultText").textContent = allTrue
+      ? "You are a GOOD CHILD!...no way...!!!"
+      : " Not a good child yet...of course...:)";
+
+    function restart() {
+      localStorage.removeItem("childQuizAnswers");
+      window.location.href = "question1.html";
+    }
+  </script>
+</body>
+</html>
